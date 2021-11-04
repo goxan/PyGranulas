@@ -2,6 +2,7 @@ from validclust import ValidClust
 from tqdm import tqdm
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
 
 class CoverageSpecificity():
     def __init__(self, data, cluster_k_min=2, cluster_k_max=11, cov_sp_xlim_right=None, cov_sp_xlim_left=None):
