@@ -3,6 +3,7 @@ from tqdm import tqdm
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 
 class CoverageSpecificity():
     def __init__(self, data, cluster_k_min=2, cluster_k_max=11, cov_sp_xlim_right=None, cov_sp_xlim_left=None):
@@ -30,6 +31,8 @@ class CoverageSpecificity():
     
     def cov_sp(self, cluster_centers, cl_number):
         coverages = []
+        coverages_max = []
+        labels = []
         sp = []
         r = np.arange(0, 1, 0.01)
         plt.figure(figsize=(16,8))
@@ -41,41 +44,75 @@ class CoverageSpecificity():
                 coverages.append(cov)
                 sp.append(self.specificity(rad))
             coverages = np.array(coverages)
+            coverages_max.append(coverages)
             plt.plot(r, coverages)
             x = self.find_x(coverages, sp, r)
             xs.append(x)
             coverages = []
             sp = []
+        labels.extend([f'coverage of cluster #{i}' for i in range(cl_number)])
         for rad in r:
             sp.append(self.specificity(rad))
         plt.plot(r, sp)
+        labels.extend(['specificity'])
+        
+        
+
+        cov_sp_dot_max = [] 
+        for cv_arr in coverages_max:
+            cv_spec_mult = sp * cv_arr
+            ind = np.argmax(cv_spec_mult)
+            cov_sp_dot_max.append((np.arange(0, 1, 0.01)[ind],cv_spec_mult[ind]) )
+            plt.plot(np.arange(0, 1, 0.01), cv_spec_mult)
+        labels.extend([f'cross product of coverage and specificity for cluster {i}' 
+                       for i in range(len(coverages_max))])
         
         pos_prev = 1.1
         prev_x = None
-        for x in set(xs):
-            if not prev_x:
-                prev_x = x                
-            if prev_x - x <= 0.1:
+        j = 0
+        for x_y_pair in cov_sp_dot_max:
+            x, y = x_y_pair
+            if prev_x and prev_x - x <=.05:
+                pass
+            else:
+                prev_x = x
+                plt.axvline(x=x, linestyle='dashed', alpha=0.7)
+                plt.annotate(f'x = {x}', (x, pos_prev))
+                labels.append(f'maximum value for coverage specificity cross product for cluster {j} equal {y}')
                 pos_prev -= 0.1 
-            
-            plt.axvline(x=x,linestyle='dashed', alpha=0.7)
-            plt.annotate(f'x = {x}', (x, pos_prev))
-        labels = [f'coverage of cluster #{i}' for i in range(cl_number)] 
-        labels.extend(['intersection','specificity'])
+            j += 1
+        
         plt.legend(labels);
         plt.xlim(right=self.cov_sp_xlim_right)
         plt.xlim(left=self.cov_sp_xlim_left)
-        return xs
+        return xs, {'cov_sp': cv_spec_mult_arr, 'cov': coverages_max, 'sp': np.tile(sp,(len(coverages_max),1))} 
 
-    def granulas(self, centers, k, rs):
+    def granulas(self, centers, rs, cov_sp_dict):
+        colors= list(mcolors.TABLEAU_COLORS.keys())
+        i=0
+        legends = []
+        
+        cov = cov_sp_dict['cov']
+        sp = cov_sp_dict['sp']
+        cov_sp = cov_sp_dict['cov_sp']
+        
         if self.data.shape[1] == 2:
             fig, ax = plt.subplots()
+            fig.set_figheight(15)
+            fig.set_figwidth(15)
             plt.scatter(self.data[:,0], self.data[:,1])
             for center, r in zip(centers, rs):
-                circle= plt.Circle(center, r, color='r', alpha=0.5 )
+                ind = np.argmax(cov_sp[i])
+                max_cov = cov[i][ind]
+                max_sp = sp[i][ind]
+                
+                circle= plt.Circle(center, r, color=colors[i], alpha=0.5 )
                 ax.add_patch(circle)
+                legends.append(f'radius={r}, coverage={max_cov}, specificity={max_sp},coverage_specificity_product={cov_sp[i][ind]}')
+                i+=1
                 ax.autoscale()
             plt.title('2d representation of the information granulas')
+            plt.legend(legends);
             plt.show()
         else:
             raise Exception('Cannot illustrate dimensions > 2')
@@ -178,4 +215,3 @@ class CoverageSpecificity():
         plt.legend(labels);
         plt.show()
         return {elem[0]: elem[1] for elem in zip(labels, dotes2)}
-
