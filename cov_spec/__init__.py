@@ -57,11 +57,12 @@ class CoverageSpecificity():
         labels.extend(['specificity'])
         
         
-
+        cov_sp_return = []
         cov_sp_dot_max = [] 
         for cv_arr in coverages_max:
             cv_spec_mult = sp * cv_arr
             ind = np.argmax(cv_spec_mult)
+            cov_sp_return.append(cv_spec_mult)
             cov_sp_dot_max.append((np.arange(0, 1, 0.01)[ind],cv_spec_mult[ind]) )
             plt.plot(np.arange(0, 1, 0.01), cv_spec_mult)
         labels.extend([f'cross product of coverage and specificity for cluster {i}' 
@@ -85,7 +86,7 @@ class CoverageSpecificity():
         plt.legend(labels);
         plt.xlim(right=self.cov_sp_xlim_right)
         plt.xlim(left=self.cov_sp_xlim_left)
-        return xs, {'cov_sp': cv_spec_mult_arr, 'cov': coverages_max, 'sp': np.tile(sp,(len(coverages_max),1))} 
+        return xs, {'cov_sp': cov_sp_return, 'cov': coverages_max, 'sp': np.tile(sp,(len(coverages_max),1))} 
 
     def granulas(self, centers, rs, cov_sp_dict):
         colors= list(mcolors.TABLEAU_COLORS.keys())
@@ -95,6 +96,7 @@ class CoverageSpecificity():
         cov = cov_sp_dict['cov']
         sp = cov_sp_dict['sp']
         cov_sp = cov_sp_dict['cov_sp']
+        
         
         if self.data.shape[1] == 2:
             fig, ax = plt.subplots()
