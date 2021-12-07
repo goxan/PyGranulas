@@ -1,4 +1,0 @@
-ValidClust
-scikit-learn
-matplotlib
-numpy
