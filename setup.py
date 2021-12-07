@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='coverage_specificity',
-      version='1.0.2',
+      version='1.0.3',
       description='Python utility to calculate and vizualize coverage and specificity',
       author='Yaroslav Plaksin',
       url='https://github.com/goxan/coverage-specificity',
