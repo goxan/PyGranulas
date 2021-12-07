@@ -2,7 +2,7 @@
 
 from distutils.core import setup
 
-setup(name='cov-spec',
+setup(name='CS',
       version='1.0',
       description='Python utility to calculate and vizualize coverage and specificity',
       author='Yaroslav Plaksin',
