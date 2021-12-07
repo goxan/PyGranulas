@@ -9,4 +9,5 @@ setup(name='cov-spec',
       url='https://github.com/goxan/coverage-specificity',
       author_email='y.plaksin@innopolis.university',
       packages=['cov_spec'],
+      install_requires=['validclust']
      )
