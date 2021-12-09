@@ -1,4 +1,5 @@
-# coverage-specificity
+# PyGranulas
+
 
 This python library provide functionality related to computing and plotting coverage, specificity and information granulas. For more details, please refer to the book: 
 
