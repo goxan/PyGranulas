@@ -1,5 +1,9 @@
 # coverage-specificity
 
+This python library provide functionality related to computing and plotting coverage, specificity and information granulas. For more details, please refer to the book: 
+
+Yao, Jingtao & Vasilakos, Athanasios & Pedrycz, Witold. (2013). Granular Computing: Perspectives and Challenges. IEEE transactions on cybernetics. 43. 10.1109/TSMCC.2012.2236648.   
+
 How to install
 
 ```
