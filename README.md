@@ -69,7 +69,7 @@ cs = CoverageSpecificity(X)
 ```python
 max_points = cs.draw_valid()
 ```
-Expected result
+Figure 1: Cluster validity indexes for two-dimensional synthetic data using k-means
 ![Expected result](https://res.cloudinary.com/dvx16m14w/image/upload/v1638892041/Screenshot_from_2021-12-07_18-42-52_kgxicg.png)
 5. After deciding best value of clusters create cluster's centers using any clustering technique, in this example we use KMeans with 3 cluster
 ```python
@@ -77,15 +77,22 @@ kmean = KMeans(n_clusters=3)
 kmean = kmean.fit(X)
 rs, cv_sp_dict =cs.cov_sp(kmean.cluster_centers_, 3)
 ```
-Expected result
+Figure 2: Specificity and coverage for k-means clusters
 ![Expected result 2](https://res.cloudinary.com/dvx16m14w/image/upload/v1638897479/image_2021-12-07_201756_o08yoi.png)
 6. Show information granulas information. _Note_: Right now for granulas representation library support only 2-dimensional data
 ```python
 cs.granulas(kmean.cluster_centers_, rs, cv_sp_dict)
 ```
+
+Figure 3: Information granules around the clusters produced by clustering method (k-means in this case)
 ![Expected result 3](https://res.cloudinary.com/dvx16m14w/image/upload/v1638897623/image_2021-12-07_202020_vctdda.png)
 
 # How it Works
+To validate the number of clusters produced by the clustering method (e.g k-means clustering), we apply four different validity indices; Dunn Index, Silhouette Index, Calinski-Harabasz Index, and Davies-Bouldin Index. The validity index provides a quality measurement for a suitable number of clusters for a sample of data. It tells us the quality of clusters but also the right number of clusters that produce that best quality. We thus compare and contrast the results from applying the four validity indices using k-means clustering. Each validity index provides a different approach and frame of reference to the quality of measure. All the four validity indices use the inter-cluster and intra-cluster relationship to find the optimal _c_.
+
+The inter-cluster relationship shows the distance between data points within a cluster with the cluster centre while the intra-class cluster shows the distance between the data point of one cluster with the other data points in another cluster. The result obtained for k-means clustering of the example dataset is shown in Figure 1.
+
+Next, we proceed with the construction of information granules with the use of the principle of justifiable granularity. The coverage and specificity is shown in Figure 2 above. The granules are formed around the prototypes produced by the clustering method (e.g k-means, fuzzy-c means, hierarchical clustering) as shown above in Figure 3.
 
 # Contributing
 
