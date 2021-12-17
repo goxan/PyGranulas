@@ -38,7 +38,8 @@ $ cd pygranulas-example
 ```
 
 ```sh
-pygranulas-example:~$ virtualenv venv && source venv/bin/activate
+pygranulas-example:~$ python3 -m venv path_to_venv
+pygranulas-example:~$ virtualenv venv && source path_to_venv/bin/activate
 pygranulas-example:~$ pip3 install coverage-specificity
 ```
 
