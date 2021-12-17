@@ -3,7 +3,7 @@
 
 This python library provide functionality related to computing and plotting coverage, specificity and information granulas. For more details, please refer to the book: 
 
-[Download](https://www.researchgate.net/profile/Jingtao-Yao-2/publication/237148111_Granular_Computing_Perspectives_and_Challenges/links/54468d290cf2f14fb80f53b8/Granular-Computing-Perspectives-and-Challenges.pdf) Yao, Jingtao & Vasilakos, Athanasios & Pedrycz, Witold. (2013). Granular Computing: Perspectives and Challenges. IEEE transactions on cybernetics. 43. 10.1109/TSMCC.2012.2236648.   
+Yao, Jingtao & Vasilakos, Athanasios & Pedrycz, Witold. (2013). Granular Computing: Perspectives and Challenges. IEEE transactions on cybernetics. 43. 10.1109/TSMCC.2012.2236648. - [Download](https://www.researchgate.net/profile/Jingtao-Yao-2/publication/237148111_Granular_Computing_Perspectives_and_Challenges/links/54468d290cf2f14fb80f53b8/Granular-Computing-Perspectives-and-Challenges.pdf)
 
 
 - [Environment Requirements](#environment-requirements)
@@ -12,20 +12,20 @@ This python library provide functionality related to computing and plotting cove
 - [Contributing](#contributing)
 - [Licensing](#licensing)
 
->> Disclaimer: This library is not tested on Windows. If you are using Windows, then it's recommended to install Linux Subsystem to make it easier to run this project.
+> Disclaimer: This library is not tested on Windows. If you are using Windows, then it's recommended to install Linux Subsystem to make it easier to run this project.
 
 # Environment Requirements
 
 In order to use this library locally, you will need the following set up.
 
-- Python >=3.6 (https://www.python.org/downloads/)
-- Virtualenv *
+- [Python >=3.6](https://www.python.org/downloads/)
+- [Virtualenv](https://pypi.org/project/virtualenv/) *
 
 * Pro tip: You can setup a virtual environment to install the library dependencies. Follow [this guide](https://docs.python-guide.org/dev/virtualenvs/) to set up a virtual environment.
 
 After you're done with the above environment set up, please proceed to dependency installation step below.
 
->> Keep in mind that if you set up a virtual environment in the way described above, the virtual environment will be scoped to the current terminal session. This means that every time you open a new terminal for this project, you will need to activate the virtual environment for the current terminal session.
+> Keep in mind that if you set up a virtual environment in the way described above, the virtual environment will be scoped to the current terminal session. This means that every time you open a new terminal for this project, you will need to activate the virtual environment for the current terminal session.
 
 # Getting Started
 Create a new project and install the library.
